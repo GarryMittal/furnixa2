@@ -97,9 +97,9 @@ app.use((_err:unknown,_req:express.Request,res:express.Response,_next:express.Ne
       ...(sentryId !== undefined && { sentryId }),
     });
 })
-// app.listen(env.PORT,'0.0.0.0',()=>{
-//     console.log(`Server running on port ${env.PORT}`);
-// })
+app.listen(env.PORT,'0.0.0.0',()=>{
+    console.log(`Server running on port ${env.PORT}`);
+})
 
 
-export default app;
+// export default app;
