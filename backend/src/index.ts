@@ -34,26 +34,26 @@ app.post('/webhooks/polar',rawJson,(req,res)=>{
 });
 
 app.use(express.json());
-// app.use(cors());
+app.use(cors());
 
-const allowedOrigins = [
-  'https://furnixa.org',
-  'https://www.furnixa.org',
-  'http://localhost:5173', 
-  'http://localhost:3000'
-];
+// const allowedOrigins = [
+//   'https://furnixa.org',
+//   'https://www.furnixa.org',
+//   'http://localhost:5173', 
+//   'http://localhost:3000'
+// ];
 
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Blocked by CORS policy: Origin not allowed'));
-    }
-  },
-  credentials: true,
-}));
+// app.use(cors({
+//   origin: function (origin, callback) {
+//     if (!origin) return callback(null, true);
+//     if (allowedOrigins.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Blocked by CORS policy: Origin not allowed'));
+//     }
+//   },
+//   credentials: true,
+// }));
 
 app.use(clerkMiddleware());
 app.use(sentryClerkUserMiddleware);
@@ -97,6 +97,8 @@ app.use((_err:unknown,_req:express.Request,res:express.Response,_next:express.Ne
       ...(sentryId !== undefined && { sentryId }),
     });
 })
+
+
 app.listen(env.PORT,'0.0.0.0',()=>{
     console.log(`Server running on port ${env.PORT}`);
 })
